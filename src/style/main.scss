@@ -1,0 +1,269 @@
+@charset "utf-8";
+
+@mixin transition($obj: all, $time: 0.2s, $type: ease-out) {
+	transition: $obj $time $type;
+	-moz-transition: $obj $time $type;	
+	-webkit-transition: $obj $time $type;	
+	-o-transition: $obj $time $type;
+}
+@mixin transitionProperty($obj) {
+	transition-property: $obj;
+	-moz-transition-property: $obj;	
+	-webkit-transition-property: $obj;	
+	-o-transition-property: $obj;
+}
+
+@mixin bgsize($width, $height) {
+	display: inline-block;
+	height: 0;
+	width: $width;
+	padding-top: $height;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+%IEBox {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+@mixin bgimg($url) {
+	background: url($url) transparent no-repeat center top;
+}
+
+@mixin transform($code) {
+	transform: $code;
+    -webkit-transform: $code;
+    -moz-transform: $code;
+    -o-transform: $code;
+    -ms-transform: $code;
+}
+
+@mixin transform-origin($code) {
+	transform-origin: $code;
+	-ms-transform-origin: $code;
+	-o-transform-origin: $code;
+	-webkit-transform-origin: $code;
+	-moz-transform-origin: $code;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	background-color: #f1f1f1;
+}
+
+ul {
+	list-style-type: none;
+}
+
+button, input, textarea {
+	font-family: inherit;
+}
+
+$themeColor: #4285F4;
+$sidebarW: 230px;
+
+#sidebar {
+	position: fixed;
+	width: $sidebarW;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: #fff;
+	padding: 10px 10px;
+	z-index: 100;
+	box-shadow: -2px 0 10px rgba(#000, 0.1);
+	@extend %IEBox;
+	@include transition;
+	
+	&.close {
+		right: -$sidebarW + 1px;
+
+		& + #main {
+			margin-right: 1px;
+		}
+	}
+}
+
+.handle {
+	// margin-right: 20px;
+	
+
+
+	.sort-wrap {
+		$circleSize: 50px;
+		$barWidth: 210px;
+
+
+		display: block;
+		position: relative;
+		height: $circleSize;
+		width: $circleSize;
+		border-radius: $circleSize/2;
+		background-color: #ccc;
+		@include transition($time: 0.3s);
+
+		&.open {
+			background-color: #16c2c2;
+		}
+
+		&:hover {
+			width: $barWidth;
+		}
+
+		.icon {
+			position: absolute;
+			left: ($circleSize - 32px)/2;
+			top: ($circleSize - 32px)/2;
+
+		}
+
+		.sort-text {
+			position: absolute;
+			display: block;
+			top: 10px;
+			left: 0;
+			width: $barWidth;
+			text-align: center;
+			color: #fff;
+			white-space: nowrap;
+			font-size: 20px;
+		}
+
+	}
+}
+
+#main {
+	padding: 0 20px 40px;
+	margin-right: $sidebarW;
+	@include transition;
+
+	.loading {
+		margin-top: 30px;
+		text-align: center;
+		font-style: 20px;
+		color: #666;
+	}
+
+
+}
+
+.grey {
+	color: #999;
+}
+
+#container {
+}
+
+// videoScaleBase * 16 & videoScaleBase * 9
+$videoScaleBase: 16;
+
+
+.widget {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	margin: 15px 15px 0 0;
+	width: $videoScaleBase * 16px;
+	padding: 23px 0 15px;
+	background-color: #fff;
+	@include transition;
+
+	&:hover {
+		box-shadow: 0px 5px 17px rgba(#000, 0.1);
+	}
+
+	i {
+		position: absolute;
+		padding: 3px 10px;
+		left: 0;
+		right: 0;
+		top: 0;
+		height: 23px;
+		color: #999;
+		font-size: 12px;
+		font-style: normal;
+
+		cursor: pointer;
+
+		&:hover {
+			background-color: #f6f6f6;
+		}
+	}
+
+	.category {
+		font-weight: 800;
+		color: $themeColor;
+	}
+}
+
+video {
+	width: 100%; 
+	height: $videoScaleBase * 9px;
+	cursor: pointer;
+	background-color: #000;
+}
+
+
+.info {
+
+	padding: 0 10px;
+
+	&-title {
+		margin: 5px 0;
+		font-size: 13px;
+		line-height: 20px;
+		font-weight: 800;
+
+		// 换行
+		// word-wrap: break-word; 
+		// word-break: normal; 
+		
+		// 省略号
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+
+		a {
+			color: inherit;
+			text-decoration: none;
+			@include transition;
+
+			&:hover {
+				color: $themeColor;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&-item {
+		float: left;
+		margin: 0 10px 2px 0;
+		font-size: 12px;
+		line-height: 10px;
+		word-wrap: break-word; 
+		word-break: normal; 
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+
+
+.icon {
+	display: inline-block;
+
+	&-sort {
+		@include bgsize(32px, 32px);
+		@include bgimg('../img/icon-sort.png');
+	}
+}

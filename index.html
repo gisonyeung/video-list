@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Video List</title>
+	<!-- <link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/main.css"> -->
+	<link rel="stylesheet" href="./dist/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="./dist/styles.css"> -->
+</head>
+<body>
+	<div id="sidebar">
+		<div class="handle">
+			<a href="?order=true" class="sort-wrap" title="进行总体排序">
+				<i class="icon icon-sort"></i>
+				<span class="sort-text">总体排序</span>
+			</a>
+		</div>
+		<div class="s-wrapper">
+			<h1 class="s-header">分页</h1>
+			<div class="s-cont">
+				<div class="row">
+					<div class="col-xs-5">
+						<input type="number" class="form-control" placeholder="row" min="0" max="10" >
+					</div>
+					<span class="pull-left">x</span>
+					<div class="col-xs-5">
+						<input type="number" class="form-control" placeholder="col" min="0">
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="main" class="clearfix">
+		<div id="container">
+			<p class="loading">请求资源中…</p>
+		</div>
+	</div>
+	<script type="text/template" id="video-item-tpl">
+		<div class="widget">
+			<i class="category" title="选择分类"></i>
+			<video class="main_video" poster="{{poster}}" controls="true">
+				<source src="{{fileUrl}}">
+			</video>
+			<div class="info">
+				<h2 class="info-title">
+					<a href="{{fileUrl}}" target="_blank" title="在新窗口中打开">{{title}}</a>
+				</h2>
+				<div class="info-detail clearfix">
+					<p class="info-item">
+						<span class="grey">id:</span>
+						{{id}}
+					</p>
+					<p class="info-item">
+						<span class="grey">score:</span>
+						{{score}}
+					</p>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script src="./dist/bundle.js"></script>
+</body>
+</html>
